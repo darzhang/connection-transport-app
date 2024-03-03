@@ -33,7 +33,7 @@ const HomePage = () => {
             <Link
               href={`${CONNECTIONS_PAGE}/${connection.id}`}
               key={connection.id}
-              className="hover:bg-accent"
+              className="hover:bg-accent flex w-full justify-center"
             >
               <ConnectionCard
                 title={connection.title}

@@ -9,10 +9,6 @@ const pickRandomItems = <T extends unknown>(arr: T[], n: number): T[] => {
 
 const seedUsers = async () => {
   try {
-    // Clean existing users
-    await prisma.user.deleteMany();
-
-    // Seed user
     await prisma.user.create({
       data: {
         name: "Test User",
@@ -29,10 +25,6 @@ const seedUsers = async () => {
 
 const seedStops = async () => {
   try {
-    // Clean existing stops
-    await prisma.stop.deleteMany();
-
-    // Seed stops
     const stopsData = DataSet.stops.map((stop) => {
       return {
         id: stop.id,
@@ -54,10 +46,6 @@ const seedStops = async () => {
 
 const seedDepartureTimes = async () => {
   try {
-    // Clean existing departure times
-    await prisma.departure.deleteMany();
-
-    // Seed departure times
     const departureTimesData = [] as {
       departureTime: string;
       stopId: number;
@@ -65,6 +53,7 @@ const seedDepartureTimes = async () => {
 
     const stops = await prisma.stop.findMany();
 
+    // Seed departure times for each stop
     for (const stop of stops) {
       const depTimes = pickRandomItems(DataSet.departures, 70).map((time) => ({
         departureTime: time,
@@ -85,12 +74,10 @@ const seedDepartureTimes = async () => {
 
 const seedConnections = async () => {
   try {
-    // Clean existing connections
-    await prisma.connection.deleteMany();
-
     // Seed connections
     const stops = await prisma.stop.findMany();
 
+    // Pick 3 random stops to use for the connection
     const choosenStops = pickRandomItems(stops, 3).map((stop) => ({
       id: stop.id,
     }));
@@ -118,6 +105,12 @@ const seedConnections = async () => {
 };
 
 async function main() {
+  // Clear the database
+  await prisma.departure.deleteMany();
+  await prisma.stop.deleteMany();
+  await prisma.connection.deleteMany();
+  await prisma.user.deleteMany();
+
   // Seed the database
   await seedUsers();
   await seedStops();
