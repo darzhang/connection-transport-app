@@ -47,7 +47,11 @@ These instructions will get you a copy of the project up and running on your loc
 
 4. **Database Setup**
 
-   If using a local PostgreSQL instance, set up the database:
+   If using a local PostgreSQL instance, set up the database as follows:
+
+   - First, create a new PostgreSQL database. Ensure PostgreSQL is installed and running on your system.
+   - Once the database is created, copy its connection URL.
+   - Update the `.env` file with this URL as the value for `DATABASE_URL` to ensure the application can connect to your local database.
 
    - Run the migration with Prisma:
 
