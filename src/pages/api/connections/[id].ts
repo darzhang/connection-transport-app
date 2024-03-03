@@ -66,6 +66,7 @@ export default async function handler(
           });
         });
 
+        res.setHeader("Cache-Control", "no-store");
         return res.status(200).json(connection);
       } catch (error: any) {
         console.error(error);

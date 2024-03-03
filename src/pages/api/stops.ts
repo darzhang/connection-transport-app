@@ -24,6 +24,7 @@ export default async function handler(
           return res.status(404).json({ error: "No stops found" });
         }
 
+        res.setHeader("Cache-Control", "no-store");
         return res.status(200).json(stops);
       } catch (error: any) {
         console.error(error);

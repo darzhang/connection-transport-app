@@ -32,6 +32,7 @@ export default async function handler(
           return res.status(404).json({ error: "User not found" });
         }
 
+        res.setHeader("Cache-Control", "no-store");
         return res.status(200).json(user.connections);
       } catch (error: any) {
         console.error(error);
