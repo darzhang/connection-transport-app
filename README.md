@@ -49,9 +49,10 @@ These instructions will get you a copy of the project up and running on your loc
 
    If using a local PostgreSQL instance, set up the database as follows:
 
-   - First, create a new PostgreSQL database. Ensure PostgreSQL is installed and running on your system.
-   - Once the database is created, copy its connection URL.
-   - Update the `.env` file with this URL as the value for `DATABASE_URL` to ensure the application can connect to your local database.
+   - First, ensure PostgreSQL is installed and running on your system.
+   - Create a new PostgreSQL database named `Connection-Transport-App`.
+   - Copy the connection URL (e.g., `postgresql://postgres:password@localhost:5432/Connection-Transport-App`) and update the `.env` file with this URL as the `DATABASE_URL`.
+   - Run the migration with Prisma to apply the database schema:
 
    - Run the migration with Prisma:
 
