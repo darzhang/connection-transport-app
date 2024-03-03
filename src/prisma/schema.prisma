@@ -8,12 +8,58 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid()) @db.Uuid
-  name      String
-  email     String   @unique
-  password  String
+  id          String       @id @default(uuid()) @db.Uuid
+  name        String
+  email       String       @unique
+  password    String
+  connections Connection[]
+  createdAt   DateTime     @default(now()) @map("created_at")
+  updatedAt   DateTime     @updatedAt @map("updated_at")
+
+  @@map("users")
+}
+
+enum Mode {
+  TRAM
+  BUS
+  TRAIN
+}
+
+model Stop {
+  id          Int          @id @default(autoincrement())
+  title       String
+  mode        Mode
+  direction   String
+  departures  Departure[]
+  connections Connection[]
+  createdAt   DateTime     @default(now()) @map("created_at")
+  updatedAt   DateTime     @updatedAt @map("updated_at")
+
+  @@unique([title, mode, direction])
+  @@map("stops")
+}
+
+model Departure {
+  id            Int      @id @default(autoincrement())
+  stopId        Int
+  stop          Stop     @relation(fields: [stopId], references: [id])
+  departureTime String   @map("departure_time")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  @@unique([stopId, departureTime])
+  @@map("departures")
+}
+
+model Connection {
+  id        Int      @id @default(autoincrement())
+  title     String
+  userId    String   @db.Uuid
+  user      User     @relation(fields: [userId], references: [id])
+  stops     Stop[]
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  @@map("users")
+  @@unique([title, userId])
+  @@map("connections")
 }
