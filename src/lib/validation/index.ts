@@ -20,3 +20,10 @@ export const loginFormSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8),
 });
+
+export const connectionFormSchema = z.object({
+  title: z.string().min(3, { message: "Title must be at least 3 characters" }),
+  stops: z.array(
+    z.object({ id: z.string().min(1, { message: "Please choose a stop" }) }),
+  ),
+});
