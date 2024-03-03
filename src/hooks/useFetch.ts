@@ -19,7 +19,6 @@ type FetchData<T> = T & { error?: string };
 const useFetch = <T>() => {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(false); // Initially not loading
-  const [error, setError] = useState<string | null>(null);
 
   // fetchData now accepts url and body, allowing for more dynamic requests
   const fetchData = async ({
@@ -28,7 +27,7 @@ const useFetch = <T>() => {
     body = null,
   }: FetchProps & {
     url: string;
-    body?: Record<string, string | number> | null;
+    body?: Record<string, any> | null;
   }) => {
     setLoading(true);
     try {
@@ -53,19 +52,21 @@ const useFetch = <T>() => {
       if (!response.ok) throw new Error(data.error ?? "An error occurred");
 
       setData(data);
-      setError(null);
     } catch (error: any) {
-      setError(error.message);
       setData(null);
+      // Show a toast notification with the error message
       toast.error("Something went wrong", {
         description: error.message,
       });
+
+      // Rethrow the error so the component can handle it
+      throw new Error(error.message);
     } finally {
       setLoading(false);
     }
   };
 
-  return { loading, data, error, fetchData };
+  return { loading, data, fetchData };
 };
 
 export default useFetch;
