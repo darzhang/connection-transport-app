@@ -32,7 +32,7 @@ const ConnectionIdPage = () => {
             <ArrowLeftIcon className="h-7 w-7" />
           </Link>
         </Button>
-        <h1 className="mr-14 line-clamp-1 text-2xl font-semibold leading-tight sm:w-full sm:text-3xl">
+        <h1 className="line-clamp-1 text-3xl font-semibold leading-tight sm:w-full">
           {data?.title ?? "Connection"}
         </h1>
       </div>
