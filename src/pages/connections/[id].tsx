@@ -32,9 +32,12 @@ const ConnectionIdPage = () => {
             <ArrowLeftIcon className="h-7 w-7" />
           </Link>
         </Button>
-        <h1 className="line-clamp-1 text-3xl font-semibold leading-tight sm:w-full">
-          {data?.title ?? "Connection"}
-        </h1>
+        {loading && <Skeleton className="h-10 w-36 rounded-md" />}
+        {data && (
+          <h1 className="line-clamp-1 h-10 text-3xl font-semibold leading-tight sm:w-full">
+            {data.title}
+          </h1>
+        )}
       </div>
 
       {/* Stop List */}
