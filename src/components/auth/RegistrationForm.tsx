@@ -19,8 +19,12 @@ import { useState } from "react";
 import { Loader2Icon } from "lucide-react";
 import { registrationFormSchema } from "@/lib/validation";
 import { signIn } from "next-auth/react";
+import { MAIN_PAGE } from "@/constants/route";
 
 const RegistrationForm = () => {
+  // Router
+  const router = useRouter();
+
   // React Hook Form
   const form = useForm<z.infer<typeof registrationFormSchema>>({
     resolver: zodResolver(registrationFormSchema),
@@ -63,7 +67,15 @@ const RegistrationForm = () => {
       const response = await signIn("credentials", {
         email: data.email,
         password: data.password,
+        redirect: false,
       });
+
+      if (!response?.ok) {
+        throw new Error(response?.error ?? "Something went wrong with login.");
+      }
+
+      // If ther is no error, redirect to main page
+      router.push(MAIN_PAGE);
     } catch (error: any) {
       setLoading(false);
       toast.error("Something went wrong", {
