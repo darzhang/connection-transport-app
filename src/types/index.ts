@@ -4,7 +4,7 @@ export type ConnWithStops = Connection & {
   stops: Stop[];
 };
 
-type StopWithDeps = Stop & {
+export type StopWithDeps = Stop & {
   departures: Departure[];
 };
 

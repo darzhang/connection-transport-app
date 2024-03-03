@@ -2,6 +2,7 @@ import { prisma } from "@/prisma/client";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import { formatTimeToMelbourneAmPm } from "@/lib/formatTime";
 
 export default async function handler(
   req: NextApiRequest,
@@ -56,6 +57,13 @@ export default async function handler(
             }
           }
           stop.departures = futureDepartures.slice(0, 3);
+
+          // Format the time to 'HH:mm AM/PM' in Melbourne Timezone
+          stop.departures.forEach((departure) => {
+            departure.departureTime = formatTimeToMelbourneAmPm(
+              departure.departureTime,
+            );
+          });
         });
 
         return res.status(200).json(connection);

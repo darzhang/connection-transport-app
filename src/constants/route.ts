@@ -6,3 +6,4 @@ export const GET_CONNECTIONS_API = "/api/connections";
 export const CREATE_NEW_CONNECTION_PAGE = "/connections/new";
 export const CREATE_NEW_CONNECTION_API = "/api/connections";
 export const GET_STOPS_API = "/api/stops";
+export const CONNECTIONS_PAGE = "/connections";
