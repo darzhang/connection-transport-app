@@ -20,6 +20,7 @@ const HomePage = () => {
     fetchData({
       url: GET_CONNECTIONS_API,
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -27,7 +28,7 @@ const HomePage = () => {
       {/* User Connections List */}
       {loading && <Skeleton className="h-24 w-full rounded-md md:w-[350px]" />}
       {data && (
-        <div className="flex w-full flex-col items-center">
+        <div className="flex w-full flex-col items-center gap-4">
           {data.map((connection) => (
             <ConnectionCard
               key={connection.id}
