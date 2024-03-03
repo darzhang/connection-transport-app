@@ -19,7 +19,7 @@ import { useState } from "react";
 import { Loader2Icon } from "lucide-react";
 import { registrationFormSchema } from "@/lib/validation";
 import { signIn } from "next-auth/react";
-import { MAIN_PAGE } from "@/constants/route";
+import { MAIN_PAGE, REGISTER_API } from "@/constants/route";
 
 const RegistrationForm = () => {
   // Router
@@ -42,7 +42,7 @@ const RegistrationForm = () => {
     setLoading(true);
     try {
       // Create User
-      const createUserResponse = await fetch("/api/register", {
+      const createUserResponse = await fetch(REGISTER_API, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

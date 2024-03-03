@@ -9,7 +9,7 @@ import { ReactElement } from "react";
 
 const RegisterPage = () => {
   return (
-    <main className="flex h-full w-full flex-col items-center justify-center">
+    <div className="flex h-full w-full flex-col items-center justify-center">
       <div className="flex flex-col space-y-2 text-center">
         <div className="text-2xl font-semibold tracking-tight">
           {"Get started with Connection Transport App"}
@@ -28,7 +28,7 @@ const RegisterPage = () => {
           </span>
         </Link>
       </div>
-    </main>
+    </div>
   );
 };
 export default RegisterPage;

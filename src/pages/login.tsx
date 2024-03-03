@@ -9,7 +9,7 @@ import NonAuthLayout from "@/components/layout/NonAuthLayout";
 
 const LoginPage = () => {
   return (
-    <main className="flex h-full w-full flex-col items-center justify-center">
+    <div className="flex h-full w-full flex-col items-center justify-center">
       <div className="flex flex-col space-y-2 text-center">
         <div className="text-2xl font-semibold tracking-tight">
           {"Welcome Back"}
@@ -28,7 +28,7 @@ const LoginPage = () => {
           </span>
         </Link>
       </div>
-    </main>
+    </div>
   );
 };
 export default LoginPage;
