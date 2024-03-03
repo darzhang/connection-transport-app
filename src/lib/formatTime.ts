@@ -5,8 +5,6 @@ export const formatTimeToMelbourneAmPm = (time: string): string => {
 
   let hourInMelbourne = parseInt(hour, 10);
   const isPm = hourInMelbourne >= 12;
-  console.log("hoursInMelbourne", hourInMelbourne);
-  console.log("isPm", isPm);
   if (hourInMelbourne > 12) hourInMelbourne -= 12; // Convert to 12-hour format
 
   return `${hourInMelbourne}:${minute} ${isPm ? "PM" : "AM"}`;

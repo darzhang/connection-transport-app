@@ -24,7 +24,7 @@ const ConnectionIdPage = () => {
   }, [id]);
 
   return (
-    <div>
+    <div className="flex h-full w-full flex-col items-center ">
       {/* Title Page and Back Button */}
       <div className="mb-4 flex w-full flex-row items-center gap-2">
         <Button variant={"ghost"} size={"icon"} asChild>
@@ -38,7 +38,7 @@ const ConnectionIdPage = () => {
       </div>
 
       {/* Stop List */}
-      {loading && <Skeleton className="h-48 w-full rounded-md md:w-[350px]" />}
+      {loading && <Skeleton className="h-48 w-full rounded-md md:w-[550px]" />}
       {data && (
         <div className="flex flex-col items-center gap-4">
           {data.stops.map((stop) => (

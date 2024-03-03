@@ -24,7 +24,7 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className="flex h-full w-full flex-col items-center ">
+    <div className="flex h-full w-full flex-col items-center">
       {/* User Connections List */}
       {loading && <Skeleton className="h-24 w-full rounded-md md:w-[350px]" />}
       {data && (
@@ -33,7 +33,7 @@ const HomePage = () => {
             <Link
               href={`${CONNECTIONS_PAGE}/${connection.id}`}
               key={connection.id}
-              className="hover:bg-accent flex w-full justify-center"
+              className="w-full md:w-[350px]"
             >
               <ConnectionCard
                 title={connection.title}
@@ -46,7 +46,7 @@ const HomePage = () => {
 
       {/* Add New Connection Button */}
       <Link href={CREATE_NEW_CONNECTION_PAGE}>
-        <Button className="text-accent mt-4">Add New Connection</Button>
+        <Button className="mt-4 text-accent">Add New Connection</Button>
       </Link>
     </div>
   );
