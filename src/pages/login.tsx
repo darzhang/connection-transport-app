@@ -4,6 +4,8 @@ import { MAIN_PAGE, REGISTER_PAGE } from "@/constants/route";
 import { GetServerSidePropsContext } from "next";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import { ReactElement } from "react";
+import NonAuthLayout from "@/components/layout/NonAuthLayout";
 
 const LoginPage = () => {
   return (
@@ -30,6 +32,10 @@ const LoginPage = () => {
   );
 };
 export default LoginPage;
+
+LoginPage.getLayout = function getLayout(page: ReactElement) {
+  return <NonAuthLayout>{page}</NonAuthLayout>;
+};
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await getServerSession(context.req, context.res, authOptions);

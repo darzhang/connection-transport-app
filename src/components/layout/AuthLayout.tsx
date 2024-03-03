@@ -12,8 +12,9 @@ import {
 import { CircleUserRoundIcon } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { useRequiredAuth } from "@/hooks/useRequiredAuth";
+import Image from "next/image";
 
-const DefaultLayout = ({ children }: { children: React.ReactNode }) => {
+const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   const { session, status } = useRequiredAuth();
 
   const handleLogout = async () => {
@@ -25,24 +26,21 @@ const DefaultLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     status === "authenticated" && (
-      <>
-        <header className="flex flex-row items-center justify-between">
+      <div className="flex h-dvh w-full flex-col">
+        <header className="flex flex-row items-center justify-between border-b p-2 shadow-md">
           {/* Navigation */}
           <nav>
             {/* Logo */}
-            <Button variant={"ghost"} asChild>
-              <Link
-                className="flex flex-row items-start justify-center"
-                href={MAIN_PAGE}
-              >
-                <div className="text-primary-foreground text-lg font-semibold">
-                  {"CTA"}
-                </div>
-                <div className="text-muted-foreground text-xs italic">
-                  {"Connection Transport App"}
-                </div>
-              </Link>
-            </Button>
+            <Link href={MAIN_PAGE}>
+              <div className="relative h-12 w-12">
+                <Image
+                  src={"/icon.png"}
+                  alt={"Connection Transport App Logo"}
+                  fill
+                  objectFit="cover"
+                />
+              </div>
+            </Link>
           </nav>
 
           {/** User Profile */}
@@ -50,13 +48,13 @@ const DefaultLayout = ({ children }: { children: React.ReactNode }) => {
             <DropdownMenuTrigger asChild>
               <Button
                 variant="ghost"
-                className="relative mr-4 h-14 w-14 p-0 focus-visible:ring-transparent"
+                className="relative h-14 w-14 p-0 focus-visible:ring-transparent"
               >
                 <CircleUserRoundIcon size={32} />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56" align="end" forceMount>
-              <DropdownMenuLabel className="font-normal">
+            <DropdownMenuContent className="w-56 p-2" align="end" forceMount>
+              <DropdownMenuLabel className="mb-4 px-0 py-0 font-normal">
                 <div className="flex flex-col space-y-1">
                   {/** Name */}
                   <p className="text-sm font-medium leading-none">
@@ -68,18 +66,23 @@ const DefaultLayout = ({ children }: { children: React.ReactNode }) => {
                   </p>
                 </div>
               </DropdownMenuLabel>
-              <DropdownMenuSeparator />
 
               {/** Logout */}
-              <DropdownMenuItem className="p-0">
-                <Button onClick={handleLogout}>{"Log out"}</Button>
+              <DropdownMenuItem className="h-10 p-0">
+                <Button
+                  onClick={handleLogout}
+                  className="h-full w-full"
+                  size={"sm"}
+                >
+                  {"Log out"}
+                </Button>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </header>
-        <main>{children}</main>
-      </>
+        <main className="flex-1">{children}</main>
+      </div>
     )
   );
 };
-export default DefaultLayout;
+export default AuthLayout;

@@ -1,9 +1,11 @@
 import RegistrationForm from "@/components/auth/RegistrationForm";
+import NonAuthLayout from "@/components/layout/NonAuthLayout";
 import { LOGIN_PAGE, MAIN_PAGE } from "@/constants/route";
 import { authOptions } from "@/lib/auth";
 import { GetServerSidePropsContext } from "next";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
+import { ReactElement } from "react";
 
 const RegisterPage = () => {
   return (
@@ -30,6 +32,10 @@ const RegisterPage = () => {
   );
 };
 export default RegisterPage;
+
+RegisterPage.getLayout = function getLayout(page: ReactElement) {
+  return <NonAuthLayout>{page}</NonAuthLayout>;
+};
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await getServerSession(context.req, context.res, authOptions);

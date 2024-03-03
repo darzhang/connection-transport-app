@@ -1,4 +1,4 @@
-import DefaultLayout from "@/components/layout/DefaultLayout";
+import AuthLayout from "@/components/layout/AuthLayout";
 import { ReactElement } from "react";
 
 const HomePage = () => {
@@ -8,5 +8,5 @@ const HomePage = () => {
 export default HomePage;
 
 HomePage.getLayout = function getLayout(page: ReactElement) {
-  return <DefaultLayout>{page}</DefaultLayout>;
+  return <AuthLayout>{page}</AuthLayout>;
 };

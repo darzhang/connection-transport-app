@@ -4,6 +4,7 @@ import { SessionProvider } from "next-auth/react";
 import type { AppProps } from "next/app";
 
 import { Inter } from "next/font/google";
+import Head from "next/head";
 import { ReactElement, ReactNode } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -24,10 +25,25 @@ export default function App({
   const getLayout = Component.getLayout ?? ((page) => page);
 
   return (
-    <SessionProvider session={session}>
-      <div className={`${inter.className}`}>
-        {getLayout(<Component {...pageProps} />)}
-      </div>
-    </SessionProvider>
+    <>
+      <Head>
+        <title>CTA</title>
+        <meta
+          name="viewport"
+          content="minimum-scale=1, initial-scale=1, maximum-scale=1, width=device-width, user-scalable=no, shrink-to-fit=no"
+        />
+        <meta
+          name="description"
+          content="Connection Transport App"
+          key="description"
+        />
+        <link rel="icon" href="/icon.png" />
+      </Head>
+      <SessionProvider session={session}>
+        <div className={`${inter.className}`}>
+          {getLayout(<Component {...pageProps} />)}
+        </div>
+      </SessionProvider>
+    </>
   );
 }
