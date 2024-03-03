@@ -8,6 +8,10 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "prisma": {
+    "schema": "./src/prisma/schema.prisma",
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} ./src/prisma/seed.ts"
+  },
   "dependencies": {
     "@prisma/client": "^5.10.2",
     "class-variance-authority": "^0.7.0",
