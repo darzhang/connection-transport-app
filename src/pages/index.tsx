@@ -5,16 +5,16 @@ import { Skeleton } from "@/components/ui/skeleton";
 import {
   GET_CONNECTIONS_API,
   CREATE_NEW_CONNECTION_PAGE,
+  CONNECTIONS_PAGE,
 } from "@/constants/route";
 import useFetch from "@/hooks/useFetch";
-import { ConnectionStopsType } from "@/types";
+import { ConnWithStops } from "@/types";
 import Link from "next/link";
 import { ReactElement, useEffect } from "react";
-import { toast } from "sonner";
 
 const HomePage = () => {
   // Fetch the user's connections
-  const { loading, data, fetchData } = useFetch<ConnectionStopsType[]>();
+  const { loading, data, fetchData } = useFetch<ConnWithStops[]>();
 
   useEffect(() => {
     fetchData({
@@ -30,11 +30,16 @@ const HomePage = () => {
       {data && (
         <div className="flex w-full flex-col items-center gap-4">
           {data.map((connection) => (
-            <ConnectionCard
+            <Link
+              href={`${CONNECTIONS_PAGE}/${connection.id}`}
               key={connection.id}
-              title={connection.title}
-              stops={connection.stops}
-            />
+              className="hover:bg-accent"
+            >
+              <ConnectionCard
+                title={connection.title}
+                stops={connection.stops}
+              />
+            </Link>
           ))}
         </div>
       )}
