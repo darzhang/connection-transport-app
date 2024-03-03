@@ -19,17 +19,15 @@ export default async function handler(
         // Get the user connections
         const user = await prisma.user.findUnique({
           where: { email: session.user.email },
-          include: { connections: true },
+          include: { connections: { include: { stops: true } } },
         });
-        // Return current user connections
-        console.log("user", user);
 
         // Throw Error if user not found
         if (!user) {
           return res.status(404).json({ error: "User not found" });
         }
 
-        return res.status(200).json(user);
+        return res.status(200).json(user.connections);
       } catch (error: any) {
         console.error(error);
 
