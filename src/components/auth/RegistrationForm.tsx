@@ -60,7 +60,7 @@ const RegistrationForm = () => {
       // Show success message if there is no error thrown
       toast.success("Account created successfully", {
         description: "Please wait while we log you in",
-        duration: 5000,
+        duration: 1000,
       });
 
       // Handle Login after the user has been created

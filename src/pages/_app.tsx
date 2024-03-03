@@ -6,6 +6,7 @@ import type { AppProps } from "next/app";
 import { Inter } from "next/font/google";
 import Head from "next/head";
 import { ReactElement, ReactNode } from "react";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -43,6 +44,7 @@ export default function App({
         <div className={`${inter.className}`}>
           {getLayout(<Component {...pageProps} />)}
         </div>
+        <Toaster richColors />
       </SessionProvider>
     </>
   );

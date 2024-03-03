@@ -12,14 +12,14 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials, req) {
         // Check if credentials are valid
-        if (!credentials) throw new Error("Credentials are required");
+        if (!credentials) throw new Error("Credentials are required.");
 
         const user = await prisma.user.findUnique({
           where: { email: credentials.email },
         });
 
         if (!user) {
-          throw new Error("User not found");
+          throw new Error("User not found.");
         }
 
         const isValidPassword = await bcrypt.compare(
@@ -28,7 +28,7 @@ export const authOptions: NextAuthOptions = {
         );
 
         if (!isValidPassword) {
-          throw new Error("Invalid password");
+          throw new Error("Invalid password.");
         }
 
         return {
