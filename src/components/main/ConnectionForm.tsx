@@ -95,7 +95,7 @@ const ConnectionForm = ({ stops }: ConnectionFormProps) => {
         {/* Stops */}
         {fields.map((field, index) => (
           <FormField
-            key={index}
+            key={field.id}
             name={`stops.${index}.id`}
             control={form.control}
             render={({ field }) => (
@@ -121,16 +121,17 @@ const ConnectionForm = ({ stops }: ConnectionFormProps) => {
                             <div className="text-sm font-semibold">
                               {stop.title}
                             </div>
-                            <div className="text-muted-foreground text-xs">{`Towards ${stop.direction}`}</div>
+                            <div className="text-xs text-muted-foreground">{`Towards ${stop.direction}`}</div>
                           </div>
                         </SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
-                  <Button variant={"ghost"} size={"icon"}>
+                  <Button type="button" variant={"ghost"} size={"icon"}>
                     <XIcon
                       color="red"
                       onClick={() => {
+                        console.log("index", index);
                         remove(index);
                       }}
                     />
@@ -145,6 +146,8 @@ const ConnectionForm = ({ stops }: ConnectionFormProps) => {
 
         {/* Add New Stop Button */}
         <Button
+          type="button"
+          disabled={loading}
           onClick={() =>
             append({
               id: "",
