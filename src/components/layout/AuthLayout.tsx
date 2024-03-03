@@ -37,7 +37,8 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
                   src={"/icon.png"}
                   alt={"Connection Transport App Logo"}
                   fill
-                  objectFit="cover"
+                  style={{ objectFit: "cover" }}
+                  sizes="100%"
                 />
               </div>
             </Link>
@@ -61,7 +62,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
                     {session!.user.name}
                   </p>
                   {/** Email */}
-                  <p className="text-muted-foreground text-xs leading-none">
+                  <p className="text-xs leading-none text-muted-foreground">
                     {session!.user.email}
                   </p>
                 </div>

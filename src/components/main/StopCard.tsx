@@ -14,13 +14,13 @@ const StopCard = ({ stop }: StopCardProps) => {
     .join(", ");
 
   return (
-    <Card className="flex w-full flex-row justify-between p-4 shadow-lg md:w-[550px]">
+    <Card className="flex w-full flex-row justify-between gap-4 p-4 shadow-lg md:w-[550px]">
       <CardHeader className="flex flex-row items-center gap-2 p-0">
         <div className="h-9 w-8">{modeIcon}</div>
         <CardTitle className="flex flex-row justify-between">
           <div className="flex flex-col">
             <div className="text-base">{stop.title}</div>
-            <div className="text-muted-foreground text-sm">
+            <div className="text-sm text-muted-foreground">
               {`Towards ${stop.direction}`}
             </div>
           </div>

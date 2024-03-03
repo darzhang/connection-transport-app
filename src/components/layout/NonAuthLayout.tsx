@@ -13,7 +13,8 @@ const NonAuthLayout = ({ children }: { children: React.ReactNode }) => {
               src={"/icon.png"}
               alt={"Connection Transport App Logo"}
               fill
-              objectFit="cover"
+              style={{ objectFit: "cover" }}
+              sizes="100%"
             />
           </div>
         </nav>

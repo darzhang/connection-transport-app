@@ -40,7 +40,7 @@ const ConnectionIdPage = () => {
       {/* Stop List */}
       {loading && <Skeleton className="h-48 w-full rounded-md md:w-[550px]" />}
       {data && (
-        <div className="flex flex-col items-center gap-4">
+        <div className="flex w-full flex-col items-center gap-4">
           {data.stops.map((stop) => (
             <StopCard key={stop.id} stop={stop} />
           ))}
