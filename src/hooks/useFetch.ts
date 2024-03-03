@@ -1,9 +1,9 @@
 import { useState } from "react";
+import { toast } from "sonner";
 
-type FetchProps<T> = {
-  url: string;
+// Removed the generic type from FetchProps as it's no longer needed there
+type FetchProps = {
   method?: "GET" | "POST";
-  body?: Record<string, string | number> | null;
 };
 
 type RequestOptionsType = {
@@ -12,14 +12,24 @@ type RequestOptionsType = {
   body?: string;
 };
 
+// FetchData type now only needs to represent the data structure
 type FetchData<T> = T & { error?: string };
 
-const useFetch = <T>({ url, method = "GET", body = null }: FetchProps<T>) => {
+// The hook itself no longer needs to take the initial configuration
+const useFetch = <T>() => {
   const [data, setData] = useState<T | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false); // Initially not loading
   const [error, setError] = useState<string | null>(null);
 
-  const fetchData = async () => {
+  // fetchData now accepts url and body, allowing for more dynamic requests
+  const fetchData = async ({
+    url,
+    method = "GET",
+    body = null,
+  }: FetchProps & {
+    url: string;
+    body?: Record<string, string | number> | null;
+  }) => {
     setLoading(true);
     try {
       // Set up the request options
@@ -37,6 +47,7 @@ const useFetch = <T>({ url, method = "GET", body = null }: FetchProps<T>) => {
       // Fetch the data
       const response = await fetch(url, requestOptions);
 
+      // Assuming your API structure includes an error field in case of failure
       const data: FetchData<T> = await response.json();
 
       if (!response.ok) throw new Error(data.error ?? "An error occurred");
@@ -46,6 +57,9 @@ const useFetch = <T>({ url, method = "GET", body = null }: FetchProps<T>) => {
     } catch (error: any) {
       setError(error.message);
       setData(null);
+      toast.error("Something went wrong", {
+        description: error.message,
+      });
     } finally {
       setLoading(false);
     }

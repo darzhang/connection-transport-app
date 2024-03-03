@@ -1,7 +1,11 @@
 import AuthLayout from "@/components/layout/AuthLayout";
 import ConnectionCard from "@/components/main/ConnectionCard";
+import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { CONNECTIONS_API } from "@/constants/route";
+import {
+  GET_CONNECTIONS_API,
+  CREATE_NEW_CONNECTION_PAGE,
+} from "@/constants/route";
 import useFetch from "@/hooks/useFetch";
 import { ConnectionStopsType } from "@/types";
 import Link from "next/link";
@@ -10,24 +14,16 @@ import { toast } from "sonner";
 
 const HomePage = () => {
   // Fetch the user's connections
-  const { loading, data, error, fetchData } = useFetch<ConnectionStopsType[]>({
-    url: CONNECTIONS_API,
-  });
-
-  console.log("data", data);
+  const { loading, data, fetchData } = useFetch<ConnectionStopsType[]>();
 
   useEffect(() => {
-    fetchData();
+    fetchData({
+      url: GET_CONNECTIONS_API,
+    });
   }, []);
 
-  if (error) {
-    toast.error("Something went wrong", {
-      description: error,
-    });
-  }
-
   return (
-    <div className="flex h-full w-full flex-col items-center px-4 py-4 md:py-10">
+    <div className="flex h-full w-full flex-col items-center ">
       {/* User Connections List */}
       {loading && <Skeleton className="h-24 w-full rounded-md md:w-[350px]" />}
       {data && (
@@ -41,6 +37,11 @@ const HomePage = () => {
           ))}
         </div>
       )}
+
+      {/* Add New Connection Button */}
+      <Link href={CREATE_NEW_CONNECTION_PAGE}>
+        <Button className="text-accent mt-4">Add New Connection</Button>
+      </Link>
     </div>
   );
 };

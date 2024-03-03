@@ -80,7 +80,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
             </DropdownMenuContent>
           </DropdownMenu>
         </header>
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 px-4 py-4 md:py-10 ">{children}</main>
       </div>
     )
   );
