@@ -35,7 +35,7 @@ const NewConnectionPage = () => {
       </div>
 
       {/* New Connection Form */}
-      {loading && <Skeleton className="h-48 w-full rounded-md md:w-[350px]" />}
+      {loading && <Skeleton className="h-48 w-full rounded-md md:w-[600px]" />}
       {data && <ConnectionForm stops={data} />}
     </div>
   );

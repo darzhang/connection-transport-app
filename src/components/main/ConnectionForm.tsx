@@ -85,7 +85,12 @@ const ConnectionForm = ({ stops }: ConnectionFormProps) => {
             <FormItem>
               <FormLabel isRequired>{"Name"}</FormLabel>
               <FormControl>
-                <Input type="text" placeholder="Connection Name" {...field} />
+                <Input
+                  type="text"
+                  placeholder="Connection Name"
+                  disabled={loading}
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -105,6 +110,7 @@ const ConnectionForm = ({ stops }: ConnectionFormProps) => {
                   <Select
                     defaultValue={field.value}
                     onValueChange={field.onChange}
+                    disabled={loading}
                   >
                     <FormControl>
                       <SelectTrigger className="h-18">
@@ -127,7 +133,12 @@ const ConnectionForm = ({ stops }: ConnectionFormProps) => {
                       ))}
                     </SelectContent>
                   </Select>
-                  <Button type="button" variant={"ghost"} size={"icon"}>
+                  <Button
+                    type="button"
+                    variant={"ghost"}
+                    size={"icon"}
+                    disabled={loading}
+                  >
                     <XIcon
                       color="red"
                       onClick={() => {
